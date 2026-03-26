@@ -19,22 +19,18 @@ targeting the [Sauce Demo](https://www.saucedemo.com) e-commerce application.
 ## Tech Stack
 
 | Tool | Purpose |
-
+|---|---|
 | Python 3.x | Language |
-
 | pytest | Test framework |
-
 | Playwright | Browser automation |
-
 | pytest-playwright | Playwright fixture integration for pytest |
-
 | pytest-html | HTML report generation |
 
 ---
 
 ## Virtual Environment
 
-As part of this project uses a Python virtual environment to isolate its dependencies
+This project uses a Python virtual environment to isolate its dependencies
 from your system Python and any other projects on your machine.
 
 **Why this matters:**
@@ -50,23 +46,27 @@ by following the setup instructions above.
 
 To confirm the environment is active, your terminal prompt should show
 `(venv)` at the start. To deactivate it at any time:
+
 ```bash
 deactivate
 ```
 
 To reactivate in a future session, navigate back to the project folder and run:
+
 ```bash
 source venv/bin/activate  # Windows: venv\Scripts\activate
 ```
+
+---
 
 ## Current Status
 
 - [x] Virtual environment configured
 - [x] Dependencies installed (`pytest`, `playwright`, `pytest-playwright`)
 - [x] Playwright browsers installed
-- [x] Example test confirmed working
+- [x] Sauce Demo loads correctly and login form elements confirmed visible
+- [ ] Login flow tests (valid credentials, invalid credentials, error states)
 - [ ] Page Object Model structure
-- [ ] Login flow tests
 - [ ] Product browsing tests
 - [ ] Cart and checkout tests
 - [ ] Failure screenshot capture
@@ -117,14 +117,16 @@ pytest --html=report.html
 
 ## Project Structure
 
+```
 .
 ├── pages/              # Page Object classes (one per page)
 ├── tests/              # Test files
 ├── conftest.py         # Shared pytest fixtures
 ├── requirements.txt    # Pinned dependencies
 └── README.md
+```
 
-> Note: this structure is the intended final structure so it is currently being built out so some directories above do not exist yet.
+> Note: this is the intended final structure — some directories above do not exist yet as the project is being built out incrementally.
 
 ---
 
