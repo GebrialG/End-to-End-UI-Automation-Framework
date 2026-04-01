@@ -65,8 +65,8 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 - [x] Dependencies installed (`pytest`, `playwright`, `pytest-playwright`)
 - [x] Playwright browsers installed
 - [x] Sauce Demo loads correctly and login form elements confirmed visible
-- [ ] Login flow tests (valid credentials, invalid credentials, error states)
-- [ ] Page Object Model structure
+- [x] Login flow tests (valid credentials, invalid credentials, error states)
+- [x] Page Object Model structure
 - [ ] Product browsing tests
 - [ ] Cart and checkout tests
 - [ ] Failure screenshot capture
