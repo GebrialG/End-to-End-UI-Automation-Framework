@@ -1,16 +1,29 @@
 import pytest
 from pages.login_page import LoginPage
 from pages.products_page import ProductsPage
+from pages.cart_page import CartPage
+from pages.checkout_page import CheckoutPage
 
 @pytest.fixture
 def login_page(page):
-    """
-    This fixture creates the LoginPage object. 
-    'page' is a built-in Playwright fixture that manages the browser setup/teardown.
-    """
     return LoginPage(page)
 
 @pytest.fixture
 def products_page(page):
-    """Creates the ProductsPage object so tests can use it immediately."""
     return ProductsPage(page)
+
+@pytest.fixture
+def authenticated_page(page, login_page, products_page):
+    """Logs in and returns a ready-to-use ProductsPage object."""
+    login_page.navigate()
+    login_page.login("standard_user", "secret_sauce")
+    products_page.is_loaded()
+    return products_page
+
+@pytest.fixture
+def cart_page(page):
+    return CartPage(page)
+
+@pytest.fixture
+def checkout_page(page):
+    return CheckoutPage(page)
