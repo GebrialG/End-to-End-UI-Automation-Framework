@@ -1,4 +1,6 @@
 import pytest
+import base64
+from datetime import datetime
 from pages.login_page import LoginPage
 from pages.products_page import ProductsPage
 from pages.cart_page import CartPage
@@ -27,3 +29,21 @@ def cart_page(page):
 @pytest.fixture
 def checkout_page(page):
     return CheckoutPage(page)
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+
+    if rep.when == "call" and rep.failed:
+        if "page" in item.funcargs:
+            page = item.funcargs["page"]
+            screenshot_bytes = page.screenshot()
+            encoded = base64.b64encode(screenshot_bytes).decode("utf-8")
+
+            # pytest-html 4.x uses report.extras (plural) and a dict format
+            from pytest_html import extras
+            rep.extras = getattr(rep, "extras", [])
+            rep.extras.append(
+                extras.image(f"data:image/png;base64,{encoded}")
+            )
